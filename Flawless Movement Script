@@ -1,0 +1,113 @@
+//Made By Casey 
+//Flawless Movement Script 1
+
+
+
+using UnityEngine;
+using System.Collections;
+
+public class movement : MonoBehaviour {
+	Animator animator;
+	// Use this for initialization
+	void Start () {
+
+	}
+
+
+
+
+	// Update is called once per frame
+	void Update () {
+		
+		animator = GetComponent<Animator> ();
+		animator.SetFloat ("run", 0);
+		animator.SetFloat ("jump", 0);
+		animator.SetFloat ("attack", 0);
+		animator.SetFloat ("water", 0);
+		animator.SetFloat ("crouch", 0);
+
+		Movement ();
+
+
+	}
+
+
+
+
+
+	void Movement ()
+	{
+		if (Input.GetKey ("a")) {
+			float h = Input.GetAxis ("Horizontal");
+			transform.Translate (-Vector2.left * 10f * Time.deltaTime);
+			transform.eulerAngles = new Vector2 (0, 180);
+			animator = GetComponent<Animator> ();
+			animator.SetFloat ("run", -h);
+
+		}
+		if (Input.GetKey ("d")) {
+			float h = Input.GetAxis ("Horizontal");
+			transform.Translate (Vector2.right * 10f * Time.deltaTime);
+			transform.eulerAngles = new Vector2 (0, 0);
+			animator = GetComponent<Animator> ();
+			animator.SetFloat ("run", h);
+
+
+
+
+		}
+
+		if (Input.GetMouseButton (1)) {
+
+
+
+			animator = GetComponent<Animator> ();
+			animator.SetFloat ("attack", 1);
+			animator.SetFloat ("water", 1);
+
+
+		}
+
+
+
+		if (Input.GetKey ("w")) {
+
+			transform.Translate (Vector3.up * 10f * Time.deltaTime);
+
+			animator = GetComponent<Animator> ();
+			float a = Input.GetAxis ("Vertical");
+
+			animator.SetFloat ("jump", a);
+
+
+
+		}
+		if (Input.GetKey ("s")) {
+
+
+			animator = GetComponent<Animator> ();
+
+
+			animator.SetFloat ("crouch", 1);
+
+
+
+		}
+		if (Input.anyKey == false) {
+			animator = GetComponent<Animator> ();
+			animator.SetFloat ("run", 0);
+			animator.SetFloat ("jump", 0);
+			animator.SetFloat ("attack", 0);
+			animator.SetFloat ("water", 0);
+			animator.SetFloat ("crouch", 0);
+
+		
+				}
+
+	}
+
+
+
+
+}
+
