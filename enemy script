@@ -1,0 +1,36 @@
+using UnityEngine;
+using System.Collections;
+
+public class NewBehaviourScript1 : MonoBehaviour {
+	Animator animator;
+	public Vector2 aPosition0 = new Vector2(0, 0);
+
+	public Vector2 aPosition1 = new Vector2(0, 0);
+	// Use this for initialization
+	void Update () {
+		
+
+		//Movement AI
+		if (Input.GetKey ("d")) {
+			transform.Translate (-Vector2.left * -60f * Time.deltaTime);
+			transform.eulerAngles = new Vector2 (0, 0);
+			animator = GetComponent<Animator> ();
+
+
+		}
+			
+		if (Input.GetKey ("a")) {
+			transform.Translate (-Vector2.right * 60f * Time.deltaTime);
+			transform.eulerAngles = new Vector2 (0, 180);
+			animator = GetComponent<Animator> ();
+		}
+			
+	}
+
+	void OnCollisionEnter2D(Collision2D enemy) {
+		animator = GetComponent<Animator> ();
+		animator.SetFloat ("enemy", 10);
+
+		if (Input.GetMouseButton (1)) {
+			animator = GetComponent<Animator> ();
+			animator.SetFloat ("death", 10);
